@@ -1,0 +1,15 @@
+Metrics/AbcSize:
+  Exclude:
+    - test/**/*_test.rb
+Metrics/ClassLength:
+  Exclude:
+    - test/**/*_test.rb
+Metrics/LineLength:
+  Exclude:
+    - test/**/*_test.rb
+Metrics/MethodLength:
+  Exclude:
+    - test/**/*_test.rb
+Style/Documentation:
+  Exclude:
+    - test/**/*_test.rb

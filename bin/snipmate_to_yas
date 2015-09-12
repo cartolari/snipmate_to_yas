@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'snipmate_to_yas'
+
+cli = SnipmateToYas::Cli
+cli.RUN(ARGV)
