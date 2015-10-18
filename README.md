@@ -1,23 +1,39 @@
 # SnipmateToYas
 
-This gem converts snippets from the vim
-[SnipMate](https://github.com/garbas/vim-snipmate) plugin to the emacs
-[YASnippet](https://github.com/capitaomorte/yasnippet) format.
+This gem converts [SnipMate](https://github.com/garbas/vim-snipmate) snippets
+into [YASnippet](https://github.com/capitaomorte/yasnippet) snippets.
 
 This gem was built mostly to convert the
 [vim-snippets](https://github.com/honza/vim-snippets) snippet library to a
-format compatible with emacs.
+format compatible with emacs but it works with any Snipmate definition.
 
-Here is a sample of a SnipMate snippet:
+Here is a sample taken from vim-snippets and note how the interpolation (the
+code between backticks are handled):
 
 ```
-TODO: Add a SnipMate snippet
+snippet cla-
+	class ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} < DelegateClass(${2:ParentClass})
+		def initialize(${3:args})
+			super(${4:del_obj})
+
+			${0}
+		end
+	end
 ```
 
 and how it'll be converted to YASnippet
 
 ```
-TODO: Add a YASnippet snippet
+# name: cla-
+# key: cla-
+# --
+class ${1:`(s-replace " " "" (s-titleized-words (file-name-base (or (buffer-file-name) ""))))`} < DelegateClass(${2:ParentClass})
+	def initialize(${3:args})
+		super(${4:del_obj})
+
+		$0
+	end
+end
 ```
 
 ## Installation
