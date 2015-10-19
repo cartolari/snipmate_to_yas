@@ -36,11 +36,41 @@ class ${1:`(s-replace " " "" (s-titleized-words (file-name-base (or (buffer-file
 end
 ```
 
-## Installation
+## Installation and usage
+
+To install the library run:
 
     $ gem install snipmate_to_yas
 
-## Usage
+To convert a single snippet run:
+
+    $ snipmate_to_yas /snippets/folder/ruby.snippets /your-converted-snippets-folder
+
+Or to convert all snippets run this simple shell script:
+
+```bash
+for f in $(find /snippets/folder -name '*.snippets' -type f); do
+  mode_name=$(basename "$f" .snippets)
+  snipmate_to_yas "$f" /your-converted-snippets-folder
+done
+```
+
+
+In the emacs side you need
+[YASnippet](https://github.com/capitaomorte/yasnippet) and
+[s.el](https://github.com/magnars/s.el), which is required for some
+interpolations.
+
+Also you need to load the converted snippets. To do this add the following to
+your Emacs init file:
+
+```elisp
+(add-to-list 'yas-snippet-dirs "/your-converted-snippets-folder")
+```
+
+For more information in how to load snippets check the YASnippet docs.
+
+## How the snippets get converted
 
 Before using this it's important to know some differences between SnipMate and
 YASnippet.
@@ -82,7 +112,7 @@ the following files'd be generated:
 # encoding: utf-8
 ```
 
-The mode names not always are equal, for example in Vim we have the cpp-mode
+The mode names are not always equal, for example in Vim we have the cpp-mode
 while in Emacs we have the c++-mode.  So the snippets from a file called
 cpp.snippets would be saved in a folder called c++-mode and not cpp-mode.
 
@@ -90,11 +120,6 @@ The snippet interpolations in SnipMate use vim-script, while the interpolations
 in YASnippet use Elisp. This is handled by this script in a extremely simple
 way, but most interpolations should work.  If you found some error please let me
 know.
-
-For information of configuration options please check the CLI:
-
-    $ snipmate_to_yas --help
-
 
 ## Contributing
 
