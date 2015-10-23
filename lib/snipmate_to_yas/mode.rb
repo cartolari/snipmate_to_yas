@@ -2,6 +2,7 @@ module SnipmateToYas
   ## Represents a snippet mode and its corresponding mode name in Vim or Emacs
   class Mode
     attr_accessor :parent
+    attr_accessor :vim_name
 
     VIM_TO_EMACS_MODE_MAP = {
       'cpp' => 'c++',
@@ -10,7 +11,7 @@ module SnipmateToYas
     }
 
     def initialize(name)
-      @name = name
+      @vim_name = name
       @parent = Mode.from_vim('_') unless name == '_'
     end
 
@@ -23,11 +24,7 @@ module SnipmateToYas
     end
 
     def emacs_name
-      VIM_TO_EMACS_MODE_MAP[@name] || @name
-    end
-
-    def vim_name
-      @name
+      VIM_TO_EMACS_MODE_MAP[@vim_name] || @vim_name
     end
   end
 end
