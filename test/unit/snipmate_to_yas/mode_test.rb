@@ -48,5 +48,13 @@ module SnipmateToYas
 
       assert_equal Mode.from_vim('c').vim_name, cpp_mode.parent.vim_name
     end
+
+    def test_unknown_modes_have_the_same_name_in_vim_and_emacs
+      unknown_mode = Mode.from_vim('unknown')
+
+      emacs_mode = unknown_mode.emacs_name
+
+      assert_equal emacs_mode, 'unknown'
+    end
   end
 end
