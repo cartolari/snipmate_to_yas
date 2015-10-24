@@ -56,5 +56,21 @@ module SnipmateToYas
 
       assert_equal emacs_mode, 'unknown'
     end
+
+    def test_ruby_mdoe_have_an_alias
+      ruby_mode = Mode.from_vim('ruby')
+
+      aliases = ruby_mode.aliases
+
+      assert_equal ['enh-ruby'], aliases
+    end
+
+    def test_modes_without_aliases_have_empty_aliases
+      unknown_mode = Mode.from_vim('unknown')
+
+      aliases = unknown_mode.aliases
+
+      assert_equal [], aliases
+    end
   end
 end

@@ -4,10 +4,19 @@ module SnipmateToYas
     attr_accessor :parent
     attr_accessor :vim_name
 
+    # Modes that have a different name between Vim and Emacs
     VIM_TO_EMACS_MODE_MAP = {
       'cpp' => 'c++',
       'cs' => 'csharp',
       'javascript' => 'js'
+    }
+
+    # Modes that may have multiple implementations in Emacs, like the ruby-mode
+    # which have the alternative enhanced ruby mode
+    EMACS_MODE_ALIASES = {
+      'clojure' => ['cider-repl-mode'],
+      'js' => ['js2'],
+      'ruby' => ['enh-ruby']
     }
 
     def initialize(name)
@@ -25,6 +34,10 @@ module SnipmateToYas
 
     def emacs_name
       VIM_TO_EMACS_MODE_MAP[@vim_name] || @vim_name
+    end
+
+    def aliases
+      EMACS_MODE_ALIASES[emacs_name] || []
     end
   end
 end
