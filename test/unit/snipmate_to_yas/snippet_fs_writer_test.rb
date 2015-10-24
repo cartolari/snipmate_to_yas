@@ -109,5 +109,22 @@ module SnipmateToYas
         assert_equal 'c-mode', yas_parents
       end
     end
+
+    def test_generates_symbolic_links_to_mode_aliases
+      FakeFS do
+        dir = '/tmp/snippets'
+        FileUtils.mkdir_p(dir)
+        mode = Mode.from_emacs('ruby')
+        snippets = Snipmate::Collection.new(
+          mode, [Yas::Snippet.new(text: 'SNIPPET 1', expand_key: '.')]
+        )
+        snippet_writer = SnippetFsWriter.new(snippets, dir)
+
+        snippet_writer.write
+        enh_ruby_alias_dir = File.readlink('/tmp/snippets/enh-ruby-mode')
+
+        assert_equal 'ruby-mode', enh_ruby_alias_dir
+      end
+    end
   end
 end
