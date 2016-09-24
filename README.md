@@ -4,7 +4,7 @@ This gem converts [SnipMate](https://github.com/garbas/vim-snipmate) snippets
 into [YASnippet](https://github.com/capitaomorte/yasnippet) snippets.
 
 _For a repository with already converted snippets please check
-[yasnippet-vim-snippets](https://github.com/cartolar/yasnippet-vim-snippets)._
+[yasnippet-vim-snippets](https://github.com/cartolari/yasnippet-vim-snippets)._
 
 This gem was built mostly to convert the
 [vim-snippets](https://github.com/honza/vim-snippets) library to a format
