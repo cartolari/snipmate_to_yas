@@ -17,6 +17,10 @@ module SnipmateToYas
         'strftime("%Y/%m/%d")' => '(format-time-string "%Y/%m/%d")',
         'strftime("%d %B, %Y")' => '(format-time-string "%d %B, %Y")',
         'strftime("%d/%m/%y %H:%M:%S")' => '(format-time-string "%d/%m/%y %H:%M:%S")',
+        # This produces a Full ISO 8601 formatted date
+        # It is the `diso` snippet  from _.snippets
+        # Taken from http://ergoemacs.org/emacs/elisp_datetime.html on 2016-09-24T17:15:00+03:00
+        'strftime("%Y-%m-%dT%H:%M:%S")' => '(concat (format-time-string "%Y-%m-%dT%H:%M:%S") ((lambda (x) (concat (substring x 0 3) ":" (substring x 3 5))) (format-time-string "%z")))',
 
         "vim_snippets#Filename('$1.py', 'foo.py')" => '(file-name-nondirectory (buffer-file-name))',
         %q{substitute(substitute(vim_snippets#Filename(), '_spec$', '', ''), '\(_\|^\)\(.\)', '\u\2', 'g')} =>
