@@ -7,4 +7,9 @@ Rake::TestTask.new(:test) do |t|
   t.test_files = FileList['test/**/*_test.rb']
 end
 
-task default: :test
+desc 'Run minitest on Guard'
+task :guard do
+  sh 'bundle exec guard'
+end
+
+task default: :guard
