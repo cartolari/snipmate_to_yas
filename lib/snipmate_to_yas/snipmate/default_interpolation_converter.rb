@@ -5,6 +5,7 @@ module SnipmateToYas
     class DefaultInterpolationConverter
       # rubocop:disable Metrics/LineLength
       INTERPOLATIONS_MAP = {
+        '${VISUAL}' => 'yas-expanded-text',
         'g:snips_author' => '"Name"',
         'g:snips_email' => '"Email"',
         'g:snips_github' => '"Github user"',

@@ -7,7 +7,7 @@ module SnipmateToYas
     class SingleParser
       EMPTY_PLACEHOLDER_REGEXP = /\$\{(?<index>\d+)\}/
       HEADING_LINE = /^snippet\s+(?<key>[^\s]+)\s+(?<name>.*)$/
-      INTERPOLATION_REGEXP = /`(?<interpolation>[^`]+)`/
+      INTERPOLATION_REGEXP = /`(?<interpolation>([^`]+))`|(?<interpolation>\$\{VISUAL\})/
       SNIPPET = <<-EOF.strip_heredoc.chomp
       # name: <%= name %>
       # key: <%= key %>

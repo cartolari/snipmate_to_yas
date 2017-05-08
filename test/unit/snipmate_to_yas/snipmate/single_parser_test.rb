@@ -96,6 +96,33 @@ EOF
         assert_equal 'ea', yas_snippet.expand_key
       end
 
+      def test_it_convets_snippet_selected_text_interpolation
+        snipmate_snippet = <<EOF
+snippet ea
+  if ($1)
+    ${2:${VISUAL}}
+  end
+  $0
+EOF
+        expected_yas_snippet = <<EOF.chomp
+# name: ea
+# key: ea
+# --
+if ($1)
+  ${2:`yas interpolation`}
+end
+$0
+EOF
+        interpolation_converter =
+          Class.new { define_method(:convert) { |_| 'yas interpolation' } }.new
+        converter = SingleParser.new(snipmate_snippet, interpolation_converter)
+
+        yas_snippet = converter.convert
+
+        assert_equal expected_yas_snippet, yas_snippet.text
+        assert_equal 'ea', yas_snippet.expand_key
+      end
+
       def test_it_handles_snippets_with_description
         snipmate_snippet = <<EOF
 snippet cla class .. end
